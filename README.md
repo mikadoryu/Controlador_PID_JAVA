@@ -20,6 +20,17 @@ Diseñar e implementar un sistema de control automático de temperatura con un p
 - 📁 **CSV** — para definir el perfil de temperatura  
 
 ---
+## 📦 Librerías Externas
+
+El proyecto utiliza la librería [**jSerialComm**](https://fazecast.github.io/jSerialComm/) para la comunicación UART con el Arduino.
+
+Puedes descargarla directamente desde Maven Repository aquí:
+
+🔗 [jSerialComm-2.11.2.jar](https://repo1.maven.org/maven2/com/fazecast/jSerialComm/2.11.2/jSerialComm-2.11.2.jar)
+
+Para agregarla a tu proyecto manualmente:
+1. Descarga el archivo JAR.
+2. Agrégalo al classpath o configura tu IDE para incluirlo como librería externa.
 
 ## 📂 Estructura del proyecto
 
