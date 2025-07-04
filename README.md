@@ -50,6 +50,18 @@ controlador_pid_temp/
 ```
 
 ---
+## 🛠️ Uso del Makefile
+
+Este proyecto incluye un `Makefile` que permite compilar, ejecutar y limpiar el proyecto fácilmente, tanto en **Windows** como en **Linux/macOS**.
+
+### 📦 Requisitos previos
+
+- Tener instalado Java (JDK 8 o superior).
+- Tener `make` instalado:
+  - En **Windows**, puedes usar Git Bash, MinGW, MSYS2 o WSL.
+  - En **Linux/macOS**, `make` suele estar preinstalado.
+- Tener JavaFX descargado y configurado en la variable `JAVAFX_PATH` del `Makefile`.
+- Tener el archivo `jSerialComm-2.11.0.jar` en el mismo directorio que el `Makefile`.
 
 ## 🚀 Instrucciones de uso
 
