@@ -1,0 +1,253 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "main",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104069929 { 
+   	label=model
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   TemperatureProfile104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TemperatureProfile</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   profile: TreeMap&lt;Integer, Double&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ getSetpoint(t: int): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ loadFromFile(path: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1981332476 { 
+   	label=simulator
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   HeaterSimulator1981332476[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)HeaterSimulator</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   ambient: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   temperature: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ update(power: double)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3343801 { 
+   	label=main
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   main3343801[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)main</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(primaryStage: Stage)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3366 { 
+   	label=io
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   UartManager3366[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UartManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   in: InputStream [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   out: OutputStream [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   serialPort: SerialPort [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ connect(portName: String, baudRate: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ disconnect()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ readTemperature(): double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ requestTemperature()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendControlSignal(signal: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendStartCommand()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ waitForConfirmation(): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ waitForFirstTemperature(firstTempOut: float[]): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3619493 { 
+   	label=view
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   MainView3619493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainView</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   chart: LineChart&lt;Number, Number&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   executor: ScheduledExecutorService [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   heater: HeaterSimulator [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   loopRunning: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   loopStarted: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   pid: PIDController [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   portSelector: ComboBox&lt;String&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   profile: TemperatureProfile [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   root: BorderPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   setpointSeries: Series&lt;Number, Number&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   t: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   tempSeries: Series&lt;Number, Number&gt; [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   uart: UartManager [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   useSimulation: boolean [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- showError(msg: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >- showWaitingDialog(onSuccess: Runnable, onFailure: Runnable)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ startLoop()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_637428636 { 
+   	label=controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   PIDController637428636[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PIDController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   integral: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   kd: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ki: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   kp: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   prevError: double [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ compute(setpoint: double, actual: double, dt: double): double</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+MainView3619493 -> HeaterSimulator1981332476[label="heater
+[0..1]"];
+MainView3619493 -> PIDController637428636[label="pid
+[0..1]"];
+MainView3619493 -> TemperatureProfile104069929[label="profile
+[0..1]"];
+MainView3619493 -> UartManager3366[label="uart
+[0..1]"];
+main3343801 -> MainView3619493[label="start() -> startLoop()"];
+    
+}
+@enduml
